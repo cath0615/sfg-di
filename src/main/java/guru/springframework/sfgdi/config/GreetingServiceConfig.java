@@ -20,11 +20,18 @@ public class GreetingServiceConfig {
         return new I18NSpanishService();
     }
 
+    //refactored to the repository(package) and mimick a database and using the 
+    //repository pattern. Our eservice will get through dependency injection,
+    //the english repository will provide out the greeting from air quotes "database"
     @Bean
     EnglishGreetingRepository englishGreetingRepository(){
         return new EnglishGreetingRepositoryImpl();
     }
 
+    //we just declared this method to take the above property in and in the Spring
+    //context, we automatically go through DI. when spring went to wire up our english 
+    //greeting service it saw the method and declaring that bean took in a repository 
+    //instance.
     @Profile("EN")
     @Bean
     I18nEnglishGreetingService i18nService(EnglishGreetingRepository englishGreetingRepository){
