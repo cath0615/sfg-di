@@ -20,7 +20,8 @@ public class GreetingServiceConfig {
     PetServiceFactory petServiceFactory(){
         return new PetServiceFactory();
     }
-
+    
+    //we pass petService Facotry as parameter into this class
     @Profile({"dog", "default"})
     @Bean
     PetService dogPetService(PetServiceFactory petServiceFactory){
