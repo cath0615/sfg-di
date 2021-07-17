@@ -13,11 +13,15 @@ import org.springframework.context.annotation.Profile;
 public class GreetingServiceConfig {
 
     @Profile({"ES", "default"})
+    //by passing a string into the bean annotation, we override it and giving the
+    //bean a specific name. Remove annotation in their own classes and define them
+    //here with java configuration
     @Bean("i18nService")
     I18NSpanishService i18NSpanishService(){
         return new I18NSpanishService();
     }
-
+    
+//declare this to be part of the English profile
     @Profile("EN")
     @Bean
     I18nEnglishGreetingService i18nService(){
