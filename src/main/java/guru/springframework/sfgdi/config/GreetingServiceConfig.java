@@ -12,12 +12,19 @@ import org.springframework.context.annotation.*;
 /**
  * Created by jt on 2/20/21.
  */
+//tell spring that we are bringing in a propertySource file and it's on the 
+//class path. It makes the Spring framework aware of this
 @PropertySource("classpath:datasource.properties")
 @ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
 
     @Bean
+    //we need to tell spring to initialize username, password and url by using @Value. use spring expression 
+    //language to get these property out of context.
+    //when spring initialize this fakeDataSource, this bean is going to be looking into the context, looking 
+    //for these properties from a property source and setting them, and then initialize the fake datasource 
+    //and return it to the context
     FakeDataSource fakeDataSource(@Value("${guru.username}") String username,
                                   @Value("${guru.password}") String password,
                                   @Value("${guru.jdbcurl}") String jdbcurl){
